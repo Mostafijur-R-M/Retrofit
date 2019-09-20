@@ -1,30 +1,33 @@
 package com.fendonus.retrofit;
 
+import androidx.annotation.DrawableRes;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
-import android.widget.Toast;
 
-import com.fendonus.retrofit.adapter.CustomAdapter;
-import com.fendonus.retrofit.model.GetDataService;
-import com.fendonus.retrofit.model.RetroPhoto;
-import com.fendonus.retrofit.model.RetrofitClientInstance;
+import com.fendonus.retrofit.adapter.AllCourseAdapter;
+import com.fendonus.retrofit.model.AllCourse;
+import com.fendonus.retrofit.model.Course;
+import com.fendonus.retrofit.viewmodel.AllCourseViewModel;
 
+import java.util.ArrayList;
 import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
 
     RecyclerView recyclerView;
-    CustomAdapter customAdapter;
     ProgressDialog progressDialog;
+    AllCourseViewModel allCourseViewModel;
+    List<Course> courseList = new ArrayList<>();
+    RecyclerView.LayoutManager layoutManager;
+    AllCourseAdapter allCourseAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,45 +38,26 @@ public class MainActivity extends AppCompatActivity {
 
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Loading...");
+        progressDialog.setCanceledOnTouchOutside(false);
         progressDialog.show();
-
-        GetDataService service = RetrofitClientInstance.getRetrofitInstance()
-                .create(GetDataService.class);
-
-        Call<List<RetroPhoto>> call = service.getAllPhotos();
-
-        call.enqueue(new Callback<List<RetroPhoto>>() {
-            @Override
-            public void onResponse(Call<List<RetroPhoto>> call, Response<List<RetroPhoto>> response) {
-
-                progressDialog.dismiss();
-                genarateDataList(response.body());
-
-            }
-
-            @Override
-            public void onFailure(Call<List<RetroPhoto>> call, Throwable t) {
-
-                progressDialog.dismiss();
-                Toast.makeText(MainActivity.this, "Something Went Wrong", Toast.LENGTH_SHORT).show();
-
-            }
-        });
-
-
+        recyclerView = findViewById(R.id.recylerViewId);
+        layoutManager = new LinearLayoutManager(MainActivity.this,RecyclerView.VERTICAL,false);
+        networkCall();
 
     }
 
-    private void genarateDataList(List<RetroPhoto> photoList){
-
-
-        recyclerView = findViewById(R.id.recylerViewId);
-        customAdapter = new CustomAdapter(photoList, this);
-
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(customAdapter);
-
+    private void networkCall() {
+        allCourseViewModel = ViewModelProviders.of(this).get(AllCourseViewModel.class);
+        allCourseViewModel.liveData().observe(this, new Observer<AllCourse>() {
+            @Override
+            public void onChanged(AllCourse allCourse) {
+                progressDialog.dismiss();
+                courseList = allCourse.getCourses();
+                allCourseAdapter = new AllCourseAdapter(MainActivity.this, courseList);
+                recyclerView.setAdapter(allCourseAdapter);
+                recyclerView.setLayoutManager(layoutManager);
+            }
+        });
 
     }
 }

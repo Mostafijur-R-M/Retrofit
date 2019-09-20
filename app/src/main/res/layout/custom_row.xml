@@ -7,7 +7,7 @@
     >
 
     <ImageView
-        android:id="@+id/coverImageId"
+        android:id="@+id/course_icon_iv_id"
         android:layout_width="150dp"
         android:layout_height="100dp"
         android:padding="5dp"/>
@@ -17,10 +17,11 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/textTilteId"
+            android:id="@+id/course_name_tv_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="5dp"/>
+            android:padding="5dp"
+            android:text="aa"/>
     </LinearLayout>
 
 </LinearLayout>
