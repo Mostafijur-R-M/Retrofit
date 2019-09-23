@@ -1,27 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:padding="2dp"
+    android:gravity="center"
     >
 
-    <ImageView
-        android:id="@+id/course_icon_iv_id"
-        android:layout_width="150dp"
-        android:layout_height="100dp"
-        android:padding="5dp"/>
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/course_name_tv_id"
+        android:layout_width="wrap_content"
+        android:layout_height="140dp"
+        android:orientation="vertical"
+        android:background="#2C2D42">
+        <ImageView
+            android:id="@+id/course_icon_iv_id"
+            android:layout_width="150dp"
+            android:layout_height="100dp"
+            android:padding="5dp"
+            android:layout_gravity="center"/>
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="5dp"
-            android:text="aa"/>
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/course_name_tv_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Course name"
+                android:layout_marginLeft="2sp"
+                android:layout_marginRight="2sp"
+                android:textColor="#ffff"/>
+        </LinearLayout>
     </LinearLayout>
 
 </LinearLayout>

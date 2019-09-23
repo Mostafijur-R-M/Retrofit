@@ -5,11 +5,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 
 import com.fendonus.retrofit.adapter.AllCourseAdapter;
 import com.fendonus.retrofit.model.AllCourse;
@@ -41,21 +45,30 @@ public class MainActivity extends AppCompatActivity {
         progressDialog.setCanceledOnTouchOutside(false);
         progressDialog.show();
         recyclerView = findViewById(R.id.recylerViewId);
-        layoutManager = new LinearLayoutManager(MainActivity.this,RecyclerView.VERTICAL,false);
+        layoutManager = new GridLayoutManager(MainActivity.this,3);
         networkCall();
 
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+
+        inflater.inflate(R.menu.menu_item, menu);
+        return super.onCreateOptionsMenu(menu);
     }
 
     private void networkCall() {
         allCourseViewModel = ViewModelProviders.of(this).get(AllCourseViewModel.class);
-        allCourseViewModel.liveData().observe(this, new Observer<AllCourse>() {
+        allCourseViewModel.liveData().observe(this, new Observer<List<AllCourse>>() {
             @Override
-            public void onChanged(AllCourse allCourse) {
+            public void onChanged(List<AllCourse> allCourses) {
                 progressDialog.dismiss();
-                courseList = allCourse.getCourses();
+                courseList = allCourses.get(0).getCourses();
                 allCourseAdapter = new AllCourseAdapter(MainActivity.this, courseList);
                 recyclerView.setAdapter(allCourseAdapter);
                 recyclerView.setLayoutManager(layoutManager);
+
+                Log.e("course: ", courseList.get(0).getTitle());
             }
         });
 

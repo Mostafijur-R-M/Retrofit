@@ -1,6 +1,7 @@
 package com.fendonus.retrofit.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,8 +38,12 @@ public class AllCourseAdapter extends RecyclerView.Adapter<AllCourseAdapter.MyVi
     @Override
     public void onBindViewHolder(@NonNull AllCourseAdapter.MyViewHolder holder, int position) {
 
+        String imageLink = courseList.get(position).getIcon();
+        String image[] = imageLink.split(" ");
+        String URL[] = image[1].split("@@");
+        Log.e("course:", URL[1]);
         holder.courseTV.setText(courseList.get(position).getTitle());
-        Glide.with(context).load(courseList.get(position).getIcon()).into(holder.iconIV);
+        Glide.with(context).load(URL[1]).into(holder.iconIV);
 
     }
 

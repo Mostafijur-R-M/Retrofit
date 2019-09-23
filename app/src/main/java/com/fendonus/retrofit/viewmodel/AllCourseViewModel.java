@@ -9,6 +9,8 @@ import androidx.lifecycle.LiveData;
 import com.fendonus.retrofit.model.AllCourse;
 import com.fendonus.retrofit.model.AllCourseRepository;
 
+import java.util.List;
+
 public class AllCourseViewModel extends AndroidViewModel {
     AllCourseRepository allCourseRepository;
 
@@ -16,7 +18,7 @@ public class AllCourseViewModel extends AndroidViewModel {
         super(application);
         allCourseRepository = new AllCourseRepository();
     }
-    public LiveData<AllCourse> liveData(){
+    public LiveData<List<AllCourse>> liveData(){
         return allCourseRepository.getMutableLiveData();
     }
 }
