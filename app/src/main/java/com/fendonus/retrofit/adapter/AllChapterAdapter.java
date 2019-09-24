@@ -1,6 +1,7 @@
 package com.fendonus.retrofit.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,7 @@ import java.util.List;
 public class AllChapterAdapter extends RecyclerView.Adapter<AllChapterAdapter.MyViewHolder> {
     Context context;
     List<Video> videoList;
+    String YOUTUBE_URL = "https://youtu.be/";
 
     public AllChapterAdapter(Context context, List<Video> videoList) {
         this.context = context;
@@ -39,6 +41,10 @@ public class AllChapterAdapter extends RecyclerView.Adapter<AllChapterAdapter.My
         String title = videoList.get(position).getTitle();
         Glide.with(context).load(thumbLink).into(holder.thumbIV);
         holder.titleTV.setText(title);
+
+        String link = videoList.get(position).getYtd();
+        String videoLink = YOUTUBE_URL+link;
+        Log.e("link: ", videoLink);
     }
 
     @Override

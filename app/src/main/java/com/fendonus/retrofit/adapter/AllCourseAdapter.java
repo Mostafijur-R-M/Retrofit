@@ -52,10 +52,12 @@ public class AllCourseAdapter extends RecyclerView.Adapter<AllCourseAdapter.MyVi
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, ""+courseList.get(position).getTitle(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, ""+position, Toast.LENGTH_SHORT).show();
                 final Intent intent;
+                String id = String.valueOf(position);
                 intent = new Intent(context, CourseDetailsActivity.class);
                 intent.putExtra("courseName", courseList.get(position).getTitle());
+                intent.putExtra("position", id);
                 context.startActivity(intent);
 
                 //goToCourseDetailsActivity();

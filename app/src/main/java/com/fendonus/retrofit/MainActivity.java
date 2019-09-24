@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
 
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Loading...");
+        progressDialog.setIcon(R.drawable.ic_loading);
         progressDialog.setCanceledOnTouchOutside(false);
         progressDialog.show();
 

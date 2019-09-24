@@ -91,7 +91,8 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/chapter_recyler_view_id"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:padding="10dp"/>
 
     </androidx.cardview.widget.CardView>
 
