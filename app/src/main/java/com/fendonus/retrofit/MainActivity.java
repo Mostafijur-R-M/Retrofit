@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.widget.AdapterView;
 
 import com.fendonus.retrofit.adapter.AllCourseAdapter;
 import com.fendonus.retrofit.model.AllCourse;
@@ -26,11 +27,12 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
 
-    RecyclerView recyclerView;
+    RecyclerView recyclerView, recyclerViewShows;
     ProgressDialog progressDialog;
     AllCourseViewModel allCourseViewModel;
     List<Course> courseList = new ArrayList<>();
     RecyclerView.LayoutManager layoutManager;
+    RecyclerView.LayoutManager layoutManager2;
     AllCourseAdapter allCourseAdapter;
 
     @Override
@@ -44,8 +46,11 @@ public class MainActivity extends AppCompatActivity {
         progressDialog.setMessage("Loading...");
         progressDialog.setCanceledOnTouchOutside(false);
         progressDialog.show();
+
         recyclerView = findViewById(R.id.recylerViewId);
+        recyclerViewShows = findViewById(R.id.recylerViewShowsId);
         layoutManager = new GridLayoutManager(MainActivity.this,3);
+        layoutManager2 = new GridLayoutManager(MainActivity.this,3);
         networkCall();
 
     }
@@ -66,11 +71,35 @@ public class MainActivity extends AppCompatActivity {
                 courseList = allCourses.get(0).getCourses();
                 allCourseAdapter = new AllCourseAdapter(MainActivity.this, courseList);
                 recyclerView.setAdapter(allCourseAdapter);
-                recyclerView.setLayoutManager(layoutManager);
+                recyclerView.setLayoutManager(layoutManager2);
 
-                Log.e("course: ", courseList.get(0).getTitle());
+                //showAllCourse(allCourses);
+
+                /*if (courseList.get(0).getId() == 91001){
+                    courseList = allCourses.get(0).getCourses();
+                    allCourseAdapter = new AllCourseAdapter(MainActivity.this, courseList);
+                    recyclerViewShows.setAdapter(allCourseAdapter);
+                    recyclerViewShows.setLayoutManager(layoutManager);
+                }*/
             }
         });
 
+    }
+
+    private void showAllCourse(List<AllCourse> allCourses) {
+        int n = courseList.size();
+        Log.e("id", ""+n);
+        for (int i = 0; i < n; i++){
+            int id = courseList.get(i).getId();
+            if (90080<id){
+                Log.e("id:", String.valueOf(courseList.get(i).getId()));
+                int a = courseList.get(i).getId();
+                courseList = allCourses.get(a).getCourses();
+                allCourseAdapter = new AllCourseAdapter(MainActivity.this, courseList);
+                recyclerViewShows.setAdapter(allCourseAdapter);
+                recyclerViewShows.setLayoutManager(layoutManager);
+            }
+
+        }
     }
 }

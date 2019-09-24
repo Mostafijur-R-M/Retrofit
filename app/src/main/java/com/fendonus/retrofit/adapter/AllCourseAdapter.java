@@ -1,17 +1,21 @@
 package com.fendonus.retrofit.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.fendonus.retrofit.CourseDetailsActivity;
+import com.fendonus.retrofit.MainActivity;
 import com.fendonus.retrofit.R;
 import com.fendonus.retrofit.model.Course;
 import com.fendonus.retrofit.viewmodel.AllCourseViewModel;
@@ -36,14 +40,30 @@ public class AllCourseAdapter extends RecyclerView.Adapter<AllCourseAdapter.MyVi
     }
 
     @Override
-    public void onBindViewHolder(@NonNull AllCourseAdapter.MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull AllCourseAdapter.MyViewHolder holder, final int position) {
 
         String imageLink = courseList.get(position).getIcon();
         String image[] = imageLink.split(" ");
         String URL[] = image[1].split("@@");
-        Log.e("course:", URL[1]);
+        //Log.e("course:", URL[1]);
         holder.courseTV.setText(courseList.get(position).getTitle());
         Glide.with(context).load(URL[1]).into(holder.iconIV);
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(context, ""+courseList.get(position).getTitle(), Toast.LENGTH_SHORT).show();
+                final Intent intent;
+                intent = new Intent(context, CourseDetailsActivity.class);
+                intent.putExtra("courseName", courseList.get(position).getTitle());
+                context.startActivity(intent);
+
+                //goToCourseDetailsActivity();
+            }
+        });
+    }
+
+    private void goToCourseDetailsActivity() {
 
     }
 

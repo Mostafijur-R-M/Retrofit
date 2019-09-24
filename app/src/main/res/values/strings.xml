@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">iTecH School</string>
+    <string name="course_name">কোর্সের নাম:</string>
+    <string name="course_title">Course Name</string>
 </resources>
