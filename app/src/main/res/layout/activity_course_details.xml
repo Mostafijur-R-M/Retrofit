@@ -7,13 +7,20 @@
     android:layout_height="match_parent"
     tools:context=".CourseDetailsActivity"
     android:orientation="vertical"
-    android:padding="5dp">
+    >
 
-    <VideoView
+    <com.google.android.youtube.player.YouTubePlayerView
+        android:id="@+id/youtube_player_view_id"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:layout_marginBottom="20dp"
         />
+    <Button
+        android:id="@+id/play_button_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Play"
+        android:layout_gravity="center"/>
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="30dp"
@@ -92,7 +99,7 @@
             android:id="@+id/chapter_recyler_view_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="10dp"/>
+            android:padding="2dp"/>
 
     </androidx.cardview.widget.CardView>
 
