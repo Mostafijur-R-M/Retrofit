@@ -1,17 +1,20 @@
 package com.fendonus.retrofit.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.fendonus.retrofit.CourseDetailsActivity;
 import com.fendonus.retrofit.R;
 import com.fendonus.retrofit.model.Video;
 
@@ -42,9 +45,16 @@ public class AllChapterAdapter extends RecyclerView.Adapter<AllChapterAdapter.My
         Glide.with(context).load(thumbLink).into(holder.thumbIV);
         holder.titleTV.setText(title);
 
-        String link = videoList.get(position).getYtd();
+        final String link = videoList.get(position).getYtd();
         String videoLink = YOUTUBE_URL+link;
         Log.e("link: ", videoLink);
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(context, ""+link, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
