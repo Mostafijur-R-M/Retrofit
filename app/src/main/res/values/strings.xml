@@ -2,6 +2,10 @@
     <string name="app_name">iTecH School</string>
     <string name="course_name">কোর্সের নাম:</string>
     <string name="course_title">Course Name</string>
+    <string name="text_accounts">একাউন্ট সমূহ</string>
+    <string name="text_uses_smart_phone_about">স্মার্টফোনের ব্যবহার সম্পর্কিত</string>
+    <string name="text_uses_computer_about">কম্পিউটারের ব্যবহার সম্পর্কিত</string>
+    <string name="text_basic_mind_qna">বেসিক মনের প্রশ্নোত্তর</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
