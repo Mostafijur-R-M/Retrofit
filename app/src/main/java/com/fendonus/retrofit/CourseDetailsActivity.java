@@ -1,6 +1,7 @@
 package com.fendonus.retrofit;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -51,8 +52,11 @@ public class CourseDetailsActivity extends AppCompatActivity {
     private AppCompatActivity appCompatActivity;
     YoutubePlayerView youtubePlayerView;
     TabLayout tabLayout;
-    ViewPager viewPager;
-    TabAccessorAdapter tabAccessorAdapter;
+    /*ViewPager viewPager;
+    TabAccessorAdapter tabAccessorAdapter;*/
+
+    CardView accountCV, phoneCV, computerCV, qnaCV;
+    RecyclerView accountRV, phoneRV, computerRV, qnaRV;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,19 +72,72 @@ public class CourseDetailsActivity extends AppCompatActivity {
                     WindowManager.LayoutParams.FLAG_FULLSCREEN);
         }
 
-        progressDialog = new ProgressDialog(this);
+        /*progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Loading...");
         progressDialog.setCanceledOnTouchOutside(false);
-        progressDialog.show();
+        progressDialog.show();*/
 
 
         youtubePlayerView = findViewById(R.id.youtubePlayerView);
-        tabLayout = findViewById(R.id.mains_tab_id);
+
+        accountRV = findViewById(R.id.chapter_recyler_view_id);
+        phoneRV = findViewById(R.id.phone_recyler_view_id);
+        computerRV = findViewById(R.id.computer_recyler_view_id);
+        qnaRV = findViewById(R.id.qna_recyler_view_id);
+
+        accountCV = findViewById(R.id.account_cv_id);
+        phoneCV = findViewById(R.id.phone_cv_id);
+        computerCV = findViewById(R.id.computer_cv_id);
+        qnaCV = findViewById(R.id.qna_cv_id);
+
+        accountCV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getAccountData();
+            }
+        });
+        phoneCV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                accountRV.setVisibility(View.GONE);
+                phoneRV.setVisibility(View.VISIBLE);
+                computerRV.setVisibility(View.GONE);
+                qnaRV.setVisibility(View.GONE);
+                networkCall(1);
+                phoneRV.setAdapter(allChapterAdapter);
+                phoneRV.setLayoutManager(layoutManager);
+            }
+        });
+        computerCV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                accountRV.setVisibility(View.GONE);
+                phoneRV.setVisibility(View.GONE);
+                computerRV.setVisibility(View.VISIBLE);
+                qnaRV.setVisibility(View.GONE);
+                networkCall(2);
+                computerRV.setAdapter(allChapterAdapter);
+                computerRV.setLayoutManager(layoutManager);
+            }
+        });
+        qnaCV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                accountRV.setVisibility(View.GONE);
+                phoneRV.setVisibility(View.GONE);
+                computerRV.setVisibility(View.GONE);
+                qnaRV.setVisibility(View.VISIBLE);
+                networkCall(3);
+                qnaRV.setAdapter(allChapterAdapter);
+                qnaRV.setLayoutManager(layoutManager);
+            }
+        });
+        /*tabLayout = findViewById(R.id.mains_tab_id);
         viewPager = findViewById(R.id.main_tabs_view_pager_id);
         tabAccessorAdapter = new TabAccessorAdapter(getSupportFragmentManager());
         viewPager.setAdapter(tabAccessorAdapter);
+        tabLayout.setupWithViewPager(viewPager);*/
 
-        tabLayout.setupWithViewPager(viewPager);
         String courseTitle = getIntent().getStringExtra("courseName");
         courseTV = findViewById(R.id.course_title_tv_id);
         //youTubePlayerView = findViewById(R.id.youtube_player_view_id);
@@ -88,9 +145,8 @@ public class CourseDetailsActivity extends AppCompatActivity {
 
         courseTV.setText(courseTitle);
         recyclerView = findViewById(R.id.chapter_recyler_view_id);
-        layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-        networkCall();
-        yputubePlayVideo();
+        //layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        yputubePlayVideo("o5NQ7a-oa8s");
         /*onInitializedListener = new YouTubePlayer.OnInitializedListener() {
             @Override
             public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
@@ -112,14 +168,25 @@ public class CourseDetailsActivity extends AppCompatActivity {
                 youTubePlayerView.initialize(YouTubeConfig.getApiKey(), onInitializedListener);
             }
         });*/
+        getAccountData();
+
     }
 
-    private void yputubePlayVideo() {
-        YTParams params = new YTParams();
+    private void getAccountData() {
+        accountRV.setVisibility(View.VISIBLE);
+        phoneRV.setVisibility(View.GONE);
+        computerRV.setVisibility(View.GONE);
+        qnaRV.setVisibility(View.GONE);
+        networkCall(0);
+        recyclerView.setAdapter(allChapterAdapter);
+        recyclerView.setLayoutManager(layoutManager);
+    }
 
+    private void yputubePlayVideo(final String videoId) {
+        YTParams params = new YTParams();
         youtubePlayerView.setAutoPlayerHeight(this);
         // initialize YoutubePlayerCallBackListener and VideoID
-        youtubePlayerView.initialize("_Q48KElcVVA", new YoutubePlayerView.YouTubeListener() {
+        youtubePlayerView.initialize(videoId, new YoutubePlayerView.YouTubeListener() {
             @Override
             public void onReady() {
 
@@ -184,17 +251,16 @@ public class CourseDetailsActivity extends AppCompatActivity {
         // this is optional but you need.
         youtubePlayerView.destroy();
     }
-    private void networkCall() {
-        final String id = getIntent().getStringExtra("position");
+    private void networkCall(final int position) {
+        //final String id = getIntent().getStringExtra("position");
+        layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         allChapterViewModel = ViewModelProviders.of(this).get(AllChapterViewModel.class);
         allChapterViewModel.listLiveData().observe(this, new Observer<List<AllChapter>>() {
             @Override
             public void onChanged(List<AllChapter> allChapters) {
-                progressDialog.dismiss();
-                videoList = allChapters.get(Integer.parseInt(id)).getVideo();
+                //progressDialog.dismiss();
+                videoList = allChapters.get(position).getVideo();
                 allChapterAdapter = new AllChapterAdapter(CourseDetailsActivity.this, videoList);
-                recyclerView.setAdapter(allChapterAdapter);
-                recyclerView.setLayoutManager(layoutManager);
             }
         });
     }

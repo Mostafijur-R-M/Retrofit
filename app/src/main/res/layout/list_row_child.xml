@@ -7,11 +7,11 @@
     android:padding="16dp">
 
     <TextView
-        android:id="@+id/textViewChild"
-        android:layout_width="match_parent"
+        android:id="@+id/expandedListItem"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textColor="@android:color/black"
         android:paddingLeft="?android:attr/expandableListPreferredChildPaddingLeft"
-        android:textSize="17dp" />
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp" />
 
 </LinearLayout>

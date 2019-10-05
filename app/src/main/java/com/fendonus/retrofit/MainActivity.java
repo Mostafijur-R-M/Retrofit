@@ -40,10 +40,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-
         progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("Loading...");
+        progressDialog.setMessage("Please Wait...");
         progressDialog.setIcon(R.drawable.ic_loading);
         progressDialog.setCanceledOnTouchOutside(false);
         progressDialog.show();
@@ -70,13 +68,12 @@ public class MainActivity extends AppCompatActivity {
             public void onChanged(List<AllCourse> allCourses) {
                 progressDialog.dismiss();
                 courseList = allCourses.get(0).getCourses();
+
                 allCourseAdapter = new AllCourseAdapter(MainActivity.this, courseList);
                 recyclerView.setAdapter(allCourseAdapter);
                 recyclerView.setLayoutManager(layoutManager2);
 
-                //showAllCourse(allCourses);
-
-                /*if (courseList.get(0).getId() == 91001){
+               /* if (courseList.get(0).getId() == 91001){
                     courseList = allCourses.get(0).getCourses();
                     allCourseAdapter = new AllCourseAdapter(MainActivity.this, courseList);
                     recyclerViewShows.setAdapter(allCourseAdapter);
@@ -87,20 +84,17 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void showAllCourse(List<AllCourse> allCourses) {
+    private void courseDataProccess() {
         int n = courseList.size();
-        Log.e("id", ""+n);
         for (int i = 0; i < n; i++){
-            int id = courseList.get(i).getId();
-            if (90080<id){
-                Log.e("id:", String.valueOf(courseList.get(i).getId()));
-                int a = courseList.get(i).getId();
-                courseList = allCourses.get(a).getCourses();
-                allCourseAdapter = new AllCourseAdapter(MainActivity.this, courseList);
-                recyclerViewShows.setAdapter(allCourseAdapter);
-                recyclerViewShows.setLayoutManager(layoutManager);
-            }
+            if (courseList.get(i).getId() < 91000){
 
+                Log.e("courseList", ""+courseList.get(i).getId());
+
+                allCourseAdapter = new AllCourseAdapter(MainActivity.this, courseList);
+                recyclerView.setAdapter(allCourseAdapter);
+                recyclerView.setLayoutManager(layoutManager2);
+            }
         }
     }
 }
