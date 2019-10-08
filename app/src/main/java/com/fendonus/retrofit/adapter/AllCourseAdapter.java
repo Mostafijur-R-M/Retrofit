@@ -53,13 +53,16 @@ public class AllCourseAdapter extends RecyclerView.Adapter<AllCourseAdapter.MyVi
             @Override
             public void onClick(View v) {
                 Toast.makeText(context, ""+position, Toast.LENGTH_SHORT).show();
-                final Intent intent;
-                String id = String.valueOf(position);
-                intent = new Intent(context, CourseDetailsActivity.class);
-                intent.putExtra("courseName", courseList.get(position).getTitle());
-                intent.putExtra("position", id);
-                context.startActivity(intent);
-
+                if (position == 0){
+                    final Intent intent;
+                    String id = String.valueOf(position);
+                    intent = new Intent(context, CourseDetailsActivity.class);
+                    intent.putExtra("courseName", courseList.get(position).getTitle());
+                    intent.putExtra("position", id);
+                    context.startActivity(intent);
+                }else {
+                    Toast.makeText(context, "Coming Soon!", Toast.LENGTH_SHORT).show();
+                }
                 //goToCourseDetailsActivity();
             }
         });

@@ -146,7 +146,9 @@ public class CourseDetailsActivity extends AppCompatActivity {
         courseTV.setText(courseTitle);
         recyclerView = findViewById(R.id.chapter_recyler_view_id);
         //layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        String link = getIntent().getStringExtra("videoLink");
         yputubePlayVideo("o5NQ7a-oa8s");
+        yputubePlayVideo(link);
         /*onInitializedListener = new YouTubePlayer.OnInitializedListener() {
             @Override
             public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
@@ -169,6 +171,7 @@ public class CourseDetailsActivity extends AppCompatActivity {
             }
         });*/
         getAccountData();
+        networkCall(0);
 
     }
 

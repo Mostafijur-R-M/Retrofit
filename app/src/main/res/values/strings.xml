@@ -7,6 +7,9 @@
     <string name="text_uses_computer_about">কম্পিউটারের ব্যবহার সম্পর্কিত</string>
     <string name="text_basic_mind_qna">বেসিক মনের প্রশ্নোত্তর</string>
 
+    <string name="open">Open</string>
+    <string name="close">Close</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
