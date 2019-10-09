@@ -53,7 +53,7 @@ public class AllChapterAdapter extends RecyclerView.Adapter<AllChapterAdapter.My
             @Override
             public void onClick(View v) {
                 Toast.makeText(context, ""+link, Toast.LENGTH_SHORT).show();
-                Intent intent = null;// = new Intent(context, CourseDetailsActivity.class);
+                Intent intent = new Intent(context, CourseDetailsActivity.class);
                 intent.putExtra("videoLink", link);
                 context.startActivity(intent);
             }

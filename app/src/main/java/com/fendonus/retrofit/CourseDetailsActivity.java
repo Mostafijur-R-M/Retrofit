@@ -171,8 +171,6 @@ public class CourseDetailsActivity extends AppCompatActivity {
             }
         });*/
         getAccountData();
-        networkCall(0);
-
     }
 
     private void getAccountData() {

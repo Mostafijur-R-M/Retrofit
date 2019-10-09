@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:id="@+id/draw_profile" android:title="Profile" />
-    <item android:id="@+id/draw_logOut" android:title="Log Out" />
+    <item android:id="@+id/draw_important_links" android:title="Important Links" />
+    <item android:id="@+id/draw_invite" android:title="Invite Friends" />
+    <item android:id="@+id/draw_facebook_link" android:title="Facebook Links" />
+    <item android:id="@+id/draw_subscribe" android:title="Subscribe" />
+    <item android:id="@+id/draw_about_us" android:title="About Us" />
+    <item android:id="@+id/draw_help" android:title="Help" />
 
+
+    <group android:id="@+id/his_move">
+        <item android:id="@+id/draw_dev_about" android:title="Developer About" />
+    </group>
 </menu>

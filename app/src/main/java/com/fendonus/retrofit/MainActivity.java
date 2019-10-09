@@ -1,6 +1,5 @@
 package com.fendonus.retrofit;
 
-import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
@@ -8,21 +7,19 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.AdapterView;
+import android.widget.Toast;
 
 import com.fendonus.retrofit.adapter.AllCourseAdapter;
 import com.fendonus.retrofit.model.AllCourse;
@@ -71,9 +68,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 switch (menuItem.getItemId()) {
-                    case R.id.draw_profile:
+                    case R.id.draw_important_links:
                         break;
-                    case R.id.draw_logOut:
+                    case R.id.draw_dev_about:
+                        Toast.makeText(MainActivity.this, "Developer", Toast.LENGTH_SHORT).show();
+                        openDialogBox();
                         break;
                 }
                 drawerLayout.closeDrawer(GravityCompat.START);
@@ -86,6 +85,13 @@ public class MainActivity extends AppCompatActivity {
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
     }
+
+    private void openDialogBox() {
+        Dialog dialog = new Dialog(this);
+        dialog.setContentView(R.layout.about_dev);
+        dialog.show();
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
