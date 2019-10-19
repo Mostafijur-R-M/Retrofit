@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.fendonus.retrofit.CourseDetailsActivity;
+import com.fendonus.retrofit.HomeActivity;
 import com.fendonus.retrofit.MainActivity;
 import com.fendonus.retrofit.R;
 import com.fendonus.retrofit.model.Course;
@@ -52,7 +53,12 @@ public class AllCourseAdapter extends RecyclerView.Adapter<AllCourseAdapter.MyVi
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+
                 Toast.makeText(context, ""+position, Toast.LENGTH_SHORT).show();
+
+                Log.e("123456", String.valueOf(courseList.get(position).getId()));
+
                 if (position == 0){
                     final Intent intent;
                     String id = String.valueOf(position);
@@ -60,6 +66,7 @@ public class AllCourseAdapter extends RecyclerView.Adapter<AllCourseAdapter.MyVi
                     intent.putExtra("courseName", courseList.get(position).getTitle());
                     intent.putExtra("position", id);
                     context.startActivity(intent);
+
                 }else {
                     Toast.makeText(context, "Coming Soon!", Toast.LENGTH_SHORT).show();
                 }

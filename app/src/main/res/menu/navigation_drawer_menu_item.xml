@@ -1,15 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:id="@+id/draw_important_links" android:title="Important Links" />
-    <item android:id="@+id/draw_invite" android:title="Invite Friends" />
-    <item android:id="@+id/draw_facebook_link" android:title="Facebook Links" />
-    <item android:id="@+id/draw_subscribe" android:title="Subscribe" />
-    <item android:id="@+id/draw_about_us" android:title="About Us" />
-    <item android:id="@+id/draw_help" android:title="Help" />
+    <item android:title="@string/important_links"
+        >
+        <menu>
+            <item
+                android:id="@+id/nav_contact"
+                android:title="Contact"
+                android:icon="@drawable/ic_contact"/>
+            <item
+                android:id="@+id/nav_team"
+                android:title="Team"
+                android:icon="@drawable/ic_team"/>
+            <item
+                android:id="@+id/nav_join"
+                android:title="Join"
+                android:icon="@drawable/ic_join"/>
+            <item
+                android:id="@+id/nav_invite"
+                android:title="Invite Us"
+                android:icon="@drawable/ic_invite"/>
+        </menu>
+    </item>
+    <item android:title="@string/facebook_links"
+        >
+        <menu>
+            <item
+                android:id="@+id/nav_facebook_page"
+                android:title="Facebook Page"
+                android:icon="@drawable/ic_facebook_page"/>
+            <item
+                android:id="@+id/nav_official_group"
+                android:title="Official Group"
+                android:icon="@drawable/ic_official_group"/>
+        </menu>
+    </item>
+    <item android:title="@string/subscribe"
+        >
+        <menu>
+            <item
+                android:id="@+id/nav_main_channel"
+                android:title="Main Channel"
+                android:icon="@drawable/ic_main_channel"/>
+            <item
+                android:id="@+id/nav_live_channel"
+                android:title="Live Channel"
+                android:icon="@drawable/ic_live_channel"/>
+        </menu>
+    </item>
+    <item
+        android:id="@+id/nav_about_us"
+        android:title="@string/about_us"
+        android:icon="@drawable/ic_about_us"/>
+    <item
+        android:id="@+id/nav_help"
+        android:title="@string/help"
+        android:icon="@drawable/ic_help"/>
+
 
 
     <group android:id="@+id/his_move">
-        <item android:id="@+id/draw_dev_about" android:title="Developer About" />
+        <item android:id="@+id/draw_dev_about"
+            android:title="Developer About"
+            android:icon="@drawable/ic_developer"/>
     </group>
+
+
 </menu>

@@ -21,26 +21,39 @@
        <com.jaedongchicken.ytplayer.YoutubePlayerView
            android:id="@+id/youtubePlayerView"
            android:layout_width="match_parent"
-           android:layout_height="wrap_content" />
+           android:layout_height="180dp"
+           />
 
        <androidx.cardview.widget.CardView
            android:layout_width="match_parent"
-           android:layout_height="30dp"
-           android:layout_marginBottom="20dp"
+           android:layout_height="35dp"
+           android:background="@color/white_nav"
            >
            <LinearLayout
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
                android:orientation="horizontal"
-               android:weightSum="2"
+               android:weightSum="3"
+               android:layout_marginTop="4dp"
                >
+               <de.hdodenhof.circleimageview.CircleImageView
+                   android:id="@+id/course_back_iv_id"
+                   xmlns:app="http://schemas.android.com/apk/res-auto"
+                   android:layout_width="30dp"
+                   android:layout_height="30dp"
+                   android:layout_marginLeft="5dp"
+                   app:civ_border_width="2dp"
+                   app:civ_border_color="@color/DarkGray"
+                   android:background="@color/DarkGray"
+                   android:src="@drawable/ic_back"
+                   android:scaleType="centerCrop"/>
                <TextView
                    android:layout_width="match_parent"
                    android:layout_height="wrap_content"
                    android:text="@string/course_name"
-                   android:textAlignment="textEnd"
+                   android:layout_marginLeft="5dp"
                    android:textColor="@color/Black"
-                   android:layout_weight="1"
+                   android:layout_weight="2"
                    android:textSize="18sp"
                    />
                <TextView
@@ -48,7 +61,6 @@
                    android:layout_width="match_parent"
                    android:layout_height="wrap_content"
                    android:text="@string/course_title"
-                   android:textAlignment="textStart"
                    android:textStyle="bold"
                    android:textSize="18sp"
                    android:layout_marginLeft="2sp"
@@ -71,25 +83,24 @@
 
        <LinearLayout
            android:layout_width="match_parent"
-           android:layout_height="wrap_content"
+           android:layout_height="40dp"
            android:orientation="horizontal"
            android:weightSum="3"
            android:background="@color/White"
-           android:layout_marginBottom="5dp"
            >
-           <Button
+           <ImageButton
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
                android:text="Videos"
                android:layout_weight="1"
-               android:background="@color/Green"
-               android:textColor="@color/White"/>
+               android:src="@mipmap/ic_video_foreground"
+               android:background="@color/colorPrimary"/>
            <Button
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
                android:text="Notes"
                android:layout_weight="1"
-               android:background="@color/Green"
+               android:background="@color/colorPrimary"
                android:textColor="@color/White"
                android:layout_marginLeft="2dp"
                android:layout_marginRight="2dp"/>
@@ -97,7 +108,7 @@
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
                android:text="Files"
-               android:background="@color/Green"
+               android:background="@color/colorPrimary"
                android:textColor="@color/White"
                android:layout_marginRight="2dp"
                android:layout_weight="1"/>
@@ -120,10 +131,10 @@
                    android:layout_width="match_parent"
                    android:layout_height="30dp"
                    android:text="@string/text_accounts"
-                   android:textColor="@color/White"
-                   android:gravity="center"
+                   android:textColor="@color/colorPrimary"
+                   android:layout_marginLeft="15dp"
                    android:textSize="20sp"
-                   android:background="@color/colorPrimary"
+                   android:background="@color/color_chapterBG"
                    />
 
                <androidx.recyclerview.widget.RecyclerView
@@ -146,9 +157,9 @@
                    android:layout_width="match_parent"
                    android:layout_height="30dp"
                    android:text="@string/text_uses_smart_phone_about"
-                   android:textColor="@color/White"
-                   android:background="@color/colorPrimary"
-                   android:gravity="center"
+                   android:textColor="@color/colorPrimary"
+                   android:background="@color/color_chapterBG"
+                   android:layout_marginLeft="15dp"
                    android:textSize="20sp"
                    />
 
@@ -172,9 +183,9 @@
                    android:layout_width="match_parent"
                    android:layout_height="30dp"
                    android:text="@string/text_uses_computer_about"
-                   android:gravity="center"
-                   android:textColor="@color/White"
-                   android:background="@color/colorPrimary"
+                   android:layout_marginLeft="15dp"
+                   android:textColor="@color/colorPrimary"
+                   android:background="@color/color_chapterBG"
                    android:textSize="20sp"
                    />
 
@@ -196,10 +207,10 @@
                <TextView
                    android:layout_width="match_parent"
                    android:layout_height="30dp"
-                   android:gravity="center"
+                   android:layout_marginLeft="15dp"
                    android:text="@string/text_basic_mind_qna"
-                   android:textColor="@color/White"
-                   android:background="@color/colorPrimary"
+                   android:textColor="@color/colorPrimary"
+                   android:background="@color/color_chapterBG"
                    android:textSize="20sp"
                    />
 

@@ -6,28 +6,23 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager.widget.ViewPager;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.TableLayout;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.fendonus.retrofit.adapter.AllChapterAdapter;
-import com.fendonus.retrofit.adapter.TabAccessorAdapter;
 import com.fendonus.retrofit.model.AllChapter;
 import com.fendonus.retrofit.model.Video;
-import com.fendonus.retrofit.model.YouTubeConfig;
 import com.fendonus.retrofit.viewmodel.AllChapterViewModel;
 import com.google.android.material.tabs.TabLayout;
-import com.google.android.youtube.player.YouTubeBaseActivity;
-import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerView;
 import com.jaedongchicken.ytplayer.YoutubePlayerView;
@@ -35,6 +30,8 @@ import com.jaedongchicken.ytplayer.model.YTParams;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class CourseDetailsActivity extends AppCompatActivity {
 
@@ -46,17 +43,18 @@ public class CourseDetailsActivity extends AppCompatActivity {
     AllChapterAdapter allChapterAdapter;
     ProgressDialog progressDialog;
     private static final String TAG = "CourseDetailsActivity";
-    YouTubePlayerView youTubePlayerView;
+    //YouTubePlayerView youTubePlayerView;
     Button playBTN;
     YouTubePlayer.OnInitializedListener onInitializedListener;
     private AppCompatActivity appCompatActivity;
     YoutubePlayerView youtubePlayerView;
-    TabLayout tabLayout;
+    //TabLayout tabLayout;
     /*ViewPager viewPager;
     TabAccessorAdapter tabAccessorAdapter;*/
 
     CardView accountCV, phoneCV, computerCV, qnaCV;
     RecyclerView accountRV, phoneRV, computerRV, qnaRV;
+    private CircleImageView backButtonIV;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,6 +88,17 @@ public class CourseDetailsActivity extends AppCompatActivity {
         computerCV = findViewById(R.id.computer_cv_id);
         qnaCV = findViewById(R.id.qna_cv_id);
 
+        backButtonIV = findViewById(R.id.course_back_iv_id);
+
+        backButtonIV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(CourseDetailsActivity.this, MainActivity.class));
+                finish();
+            }
+        });
+
+        accountCV.setClickable(true);
         accountCV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -146,9 +155,11 @@ public class CourseDetailsActivity extends AppCompatActivity {
         courseTV.setText(courseTitle);
         recyclerView = findViewById(R.id.chapter_recyler_view_id);
         //layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-        String link = getIntent().getStringExtra("videoLink");
-        yputubePlayVideo("o5NQ7a-oa8s");
-        yputubePlayVideo(link);
+        //String link = getIntent().getStringExtra("videoLink");
+       /* youtubePlayVideo("o5NQ7a-oa8s");
+        youtubePlayVideo(link);*/
+
+       //setNewVideoLink(link);
         /*onInitializedListener = new YouTubePlayer.OnInitializedListener() {
             @Override
             public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
@@ -171,6 +182,10 @@ public class CourseDetailsActivity extends AppCompatActivity {
             }
         });*/
         getAccountData();
+
+    }
+    public void setNewVideoLink(String link){
+        youtubePlayVideo(link);
     }
 
     private void getAccountData() {
@@ -183,14 +198,15 @@ public class CourseDetailsActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
     }
 
-    private void yputubePlayVideo(final String videoId) {
+    private void youtubePlayVideo(final String videoId) {
+
         YTParams params = new YTParams();
         youtubePlayerView.setAutoPlayerHeight(this);
         // initialize YoutubePlayerCallBackListener and VideoID
         youtubePlayerView.initialize(videoId, new YoutubePlayerView.YouTubeListener() {
             @Override
             public void onReady() {
-
+                youtubePlayerView.play();
             }
 
             @Override
@@ -234,7 +250,7 @@ public class CourseDetailsActivity extends AppCompatActivity {
             }
         });
         // psuse video
-        youtubePlayerView.pause();
+        //youtubePlayerView.pause();
         // play video when it's ready
         youtubePlayerView.play();
     }

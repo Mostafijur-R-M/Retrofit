@@ -38,24 +38,26 @@ public class AllChapterAdapter extends RecyclerView.Adapter<AllChapterAdapter.My
     }
 
     @Override
-    public void onBindViewHolder(@NonNull AllChapterAdapter.MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull AllChapterAdapter.MyViewHolder holder,final int position) {
 
         String thumbLink = videoList.get(position).getThumb();
         String title = videoList.get(position).getTitle();
         Glide.with(context).load(thumbLink).into(holder.thumbIV);
         holder.titleTV.setText(title);
 
-        final String link = videoList.get(position).getYtd();
-        String videoLink = YOUTUBE_URL+link;
-        Log.e("link: ", videoLink);
+
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, ""+link, Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(context, CourseDetailsActivity.class);
+                final String link = videoList.get(position).getYtd();
+                String videoLink = YOUTUBE_URL+link;
+                Log.e("link: ", videoLink);
+
+                /*Intent intent = new Intent(context, CourseDetailsActivity.class);
                 intent.putExtra("videoLink", link);
-                context.startActivity(intent);
+                context.startActivity(intent);*/
+                ((CourseDetailsActivity)context).setNewVideoLink(link);
             }
         });
     }

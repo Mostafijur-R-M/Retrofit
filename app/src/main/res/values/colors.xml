@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#2C2D42</color>
-    <color name="colorPrimaryDark">#2C2D42</color>
+    <color name="colorPrimary">#1F2021</color>
+    <color name="colorPrimaryDark">#1F2021</color>
     <color name="colorAccent">#D81B60</color>
 
+    <color name="color_chapterBG">#F7F7F7</color>
+    <color name="color_active_vdo_BG">#34495E</color>
+
     <color name="White">#FFFFFF</color>
+    <color name="white_nav">#FAFAFA</color>
     <color name="Ivory">#FFFFF0</color>
     <color name="LightYellow">#FFFFE0</color>
     <color name="Yellow">#FFFF00</color>

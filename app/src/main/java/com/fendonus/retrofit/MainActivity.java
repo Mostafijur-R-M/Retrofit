@@ -15,6 +15,7 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -24,6 +25,8 @@ import android.widget.Toast;
 import com.fendonus.retrofit.adapter.AllCourseAdapter;
 import com.fendonus.retrofit.model.AllCourse;
 import com.fendonus.retrofit.model.Course;
+import com.fendonus.retrofit.utility.Constants;
+import com.fendonus.retrofit.utility.Network;
 import com.fendonus.retrofit.viewmodel.AllCourseViewModel;
 import com.google.android.material.navigation.NavigationView;
 
@@ -49,11 +52,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Please Wait...");
         progressDialog.setIcon(R.drawable.ic_loading);
         progressDialog.setCanceledOnTouchOutside(false);
         progressDialog.show();
+
+        Network.isInternetConnection(this);
 
         navigationView = findViewById(R.id.navigationView);
         drawerLayout = findViewById(R.id.drawerLayout);
@@ -68,11 +75,38 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 switch (menuItem.getItemId()) {
-                    case R.id.draw_important_links:
+                    case R.id.nav_contact:
+                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(Constants.CONTACT_URL)));
+                        break;
+                    case R.id.nav_team:
+                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(Constants.TEAM_URL)));
+                        break;
+                    case R.id.nav_join:
+                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(Constants.JOIN_URL)));
+                        break;
+                    case R.id.nav_invite:
+                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(Constants.INVITE_URL)));
+                        break;
+                    case R.id.nav_facebook_page:
+                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(Constants.FB_PAGE_URL)));
+                        break;
+                    case R.id.nav_official_group:
+                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(Constants.OFFICIAL_GROUP_URL)));
+                        break;
+                    case R.id.nav_main_channel:
+                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(Constants.MAIN_CHANNEL_URL)));
+                        break;
+                    case R.id.nav_live_channel:
+                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(Constants.LIVE_CHANNEL_URL)));
+                        break;
+                    case R.id.nav_about_us:
+                        openAboutUsDialogBox();
+                        break;
+                    case R.id.nav_help:
+                        openHelpDialogBox();
                         break;
                     case R.id.draw_dev_about:
-                        Toast.makeText(MainActivity.this, "Developer", Toast.LENGTH_SHORT).show();
-                        openDialogBox();
+                        openDevAboutDialogBox();
                         break;
                 }
                 drawerLayout.closeDrawer(GravityCompat.START);
@@ -86,9 +120,19 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void openDialogBox() {
+    private void openDevAboutDialogBox() {
         Dialog dialog = new Dialog(this);
         dialog.setContentView(R.layout.about_dev);
+        dialog.show();
+    }
+    private void openAboutUsDialogBox() {
+        Dialog dialog = new Dialog(this);
+        dialog.setContentView(R.layout.about_us_box);
+        dialog.show();
+    }
+    private void openHelpDialogBox() {
+        Dialog dialog = new Dialog(this);
+        dialog.setContentView(R.layout.help_box);
         dialog.show();
     }
 
