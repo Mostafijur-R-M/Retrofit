@@ -15,11 +15,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.fendonus.retrofit.CourseDetailsActivity;
-import com.fendonus.retrofit.HomeActivity;
-import com.fendonus.retrofit.MainActivity;
 import com.fendonus.retrofit.R;
 import com.fendonus.retrofit.model.Course;
-import com.fendonus.retrofit.viewmodel.AllCourseViewModel;
+import com.fendonus.retrofit.view.CyberSecurityActivity;
 
 import java.util.List;
 
@@ -67,7 +65,15 @@ public class AllCourseAdapter extends RecyclerView.Adapter<AllCourseAdapter.MyVi
                     intent.putExtra("position", id);
                     context.startActivity(intent);
 
-                }else {
+                }else if (position == 1){
+                    final Intent intent;
+                    String id = String.valueOf(position);
+                    intent = new Intent(context, CyberSecurityActivity.class);
+                    intent.putExtra("courseName", courseList.get(position).getTitle());
+                    intent.putExtra("position", id);
+                    context.startActivity(intent);
+                }
+                else {
                     Toast.makeText(context, "Coming Soon!", Toast.LENGTH_SHORT).show();
                 }
                 //goToCourseDetailsActivity();

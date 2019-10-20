@@ -13,7 +13,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class AllChapterRepository {
+public class CyberSecurityChapterRepository {
     MutableLiveData<List<AllChapter>> mutableLiveData;
     List<AllChapter> allChapters;
 
@@ -22,7 +22,7 @@ public class AllChapterRepository {
             mutableLiveData = new MutableLiveData<>();
         }
         ApiInterface apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
-        Call<List<AllChapter>> call = apiInterface.getAllChapter("IwAR0MunBO7ZA-ewDaQT6HHOHIF-zx0bI--9QzyoSNdcLnUKj-S5Nr7NbhXXA");
+        Call<List<AllChapter>> call = apiInterface.getCyberSecurityChaper("IwAR0MunBO7ZA-ewDaQT6HHOHIF-zx0bI--9QzyoSNdcLnUKj-S5Nr7NbhXXA");
         call.enqueue(new Callback<List<AllChapter>>() {
             @Override
             public void onResponse(Call<List<AllChapter>> call, Response<List<AllChapter>> response) {

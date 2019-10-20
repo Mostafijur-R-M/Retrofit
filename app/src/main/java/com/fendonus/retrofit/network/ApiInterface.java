@@ -21,6 +21,10 @@ public interface ApiInterface {
     @GET("api/chapter/90046{fbclid}")
     Call<List<AllChapter>> getAllChapter(@Query("fbclid")
                                                  String fbclid);
+
+    @GET("api/chapter/90059{fbclid}")
+    Call<List<AllChapter>> getCyberSecurityChaper(@Query("fbclid")
+                                                 String fbclid);
 }
 //IwAR0xGTEH4UJ1crYckICW5Kluqbg5fIJvcRZtY80iGtVCg2RPei1ay2PGvm8
 //IwAR0MunBO7ZA-ewDaQT6HHOHIF-zx0bI--9QzyoSNdcLnUKj-S5Nr7NbhXXA

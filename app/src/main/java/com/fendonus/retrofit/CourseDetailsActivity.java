@@ -102,7 +102,14 @@ public class CourseDetailsActivity extends AppCompatActivity {
         accountCV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getAccountData();
+                accountRV.setVisibility(View.VISIBLE);
+                phoneRV.setVisibility(View.GONE);
+                computerRV.setVisibility(View.GONE);
+                qnaRV.setVisibility(View.GONE);
+                networkCall(0);
+                accountRV.setAdapter(allChapterAdapter);
+                accountRV.setLayoutManager(layoutManager);
+                //getAccountData();
             }
         });
         phoneCV.setOnClickListener(new View.OnClickListener() {
@@ -181,7 +188,7 @@ public class CourseDetailsActivity extends AppCompatActivity {
                 youTubePlayerView.initialize(YouTubeConfig.getApiKey(), onInitializedListener);
             }
         });*/
-        getAccountData();
+
 
     }
     public void setNewVideoLink(String link){
@@ -268,6 +275,7 @@ public class CourseDetailsActivity extends AppCompatActivity {
         // this is optional but you need.
         youtubePlayerView.destroy();
     }
+
     private void networkCall(final int position) {
         //final String id = getIntent().getStringExtra("position");
         layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
