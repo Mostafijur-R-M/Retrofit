@@ -54,7 +54,7 @@
         >
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/account_cv_id"
+            android:id="@+id/cat1_cv_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -79,9 +79,9 @@
                 android:padding="2dp" />
         </androidx.cardview.widget.CardView>
         <androidx.cardview.widget.CardView
-            android:id="@+id/phone_cv_id"
+            android:id="@+id/cat2_cv_id"
             android:layout_width="match_parent"
-            android:layout_below="@+id/account_cv_id"
+            android:layout_below="@+id/cat1_cv_id"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="2dp"
@@ -106,10 +106,10 @@
                 />
         </androidx.cardview.widget.CardView>
         <androidx.cardview.widget.CardView
-            android:id="@+id/computer_cv_id"
+            android:id="@+id/cat3_cv_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/phone_cv_id"
+            android:layout_below="@+id/cat2_cv_id"
             android:layout_gravity="center"
             android:layout_marginTop="2dp">
 
@@ -131,11 +131,11 @@
                 android:layout_marginTop="30dp"/>
         </androidx.cardview.widget.CardView>
         <androidx.cardview.widget.CardView
-            android:id="@+id/qna_cv_id"
+            android:id="@+id/cat4_cv_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_below="@+id/computer_cv_id"
+            android:layout_below="@+id/cat3_cv_id"
             android:layout_marginTop="2dp">
 
             <TextView

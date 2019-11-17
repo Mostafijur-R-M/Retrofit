@@ -135,7 +135,11 @@ public class MainActivity extends AppCompatActivity {
         dialog.setContentView(R.layout.help_box);
         dialog.show();
     }
-
+    private void openNotificationsDialogBox() {
+        Dialog dialog = new Dialog(this);
+        dialog.setContentView(R.layout.notifications_box);
+        dialog.show();
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();

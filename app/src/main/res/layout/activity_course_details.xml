@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".CourseDetailsActivity"
+    android:orientation="vertical"
     >
 
     <!--<com.google.android.youtube.player.YouTubePlayerView
@@ -14,15 +15,17 @@
         android:layout_height="200dp"
         android:layout_marginBottom="20dp"
         />-->
+    <com.jaedongchicken.ytplayer.YoutubePlayerView
+        android:id="@+id/youtubePlayerView"
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        />
+
    <LinearLayout
        android:layout_width="match_parent"
        android:layout_height="match_parent"
        android:orientation="vertical">
-       <com.jaedongchicken.ytplayer.YoutubePlayerView
-           android:id="@+id/youtubePlayerView"
-           android:layout_width="match_parent"
-           android:layout_height="180dp"
-           />
+
 
        <androidx.cardview.widget.CardView
            android:layout_width="match_parent"
@@ -45,7 +48,7 @@
                    app:civ_border_width="2dp"
                    app:civ_border_color="@color/DarkGray"
                    android:background="@color/DarkGray"
-                   android:src="@drawable/ic_back"
+                   android:src="@drawable/home_img"
                    android:scaleType="centerCrop"/>
                <TextView
                    android:layout_width="match_parent"
@@ -88,31 +91,39 @@
            android:weightSum="3"
            android:background="@color/White"
            >
-           <ImageButton
+           <Button
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
                android:text="Videos"
                android:layout_weight="1"
-               android:src="@mipmap/ic_video_foreground"
+               android:textColor="@color/White"
+               android:textAllCaps="false"
                android:background="@color/colorPrimary"/>
            <Button
+               android:id="@+id/notes_btn_id"
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
                android:text="Notes"
                android:layout_weight="1"
+               android:textAllCaps="false"
                android:background="@color/colorPrimary"
                android:textColor="@color/White"
                android:layout_marginLeft="2dp"
                android:layout_marginRight="2dp"/>
            <Button
+               android:id="@+id/files_btn_id"
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
                android:text="Files"
+               android:textAllCaps="false"
                android:background="@color/colorPrimary"
                android:textColor="@color/White"
                android:layout_marginRight="2dp"
                android:layout_weight="1"/>
        </LinearLayout>
+       <ScrollView
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content">
        <RelativeLayout
            android:layout_width="match_parent"
            android:layout_height="match_parent"
@@ -120,13 +131,13 @@
            >
 
            <androidx.cardview.widget.CardView
-               android:id="@+id/account_cv_id"
+               android:id="@+id/cat1_cv_id"
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
                android:layout_gravity="center"
                android:layout_marginTop="2dp"
+               android:visibility="gone"
                >
-
                <TextView
                    android:id="@+id/cat1_tv_id"
                    android:layout_width="match_parent"
@@ -147,11 +158,12 @@
                    android:padding="2dp" />
            </androidx.cardview.widget.CardView>
            <androidx.cardview.widget.CardView
-               android:id="@+id/phone_cv_id"
+               android:id="@+id/cat2_cv_id"
                android:layout_width="match_parent"
-               android:layout_below="@+id/account_cv_id"
+               android:layout_below="@+id/cat1_cv_id"
                android:layout_height="wrap_content"
                android:layout_gravity="center"
+               android:visibility="gone"
                android:layout_marginTop="2dp"
                >
 
@@ -176,12 +188,13 @@
                    />
            </androidx.cardview.widget.CardView>
            <androidx.cardview.widget.CardView
-               android:id="@+id/computer_cv_id"
+               android:id="@+id/cat3_cv_id"
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
-               android:layout_below="@+id/phone_cv_id"
+               android:layout_below="@+id/cat2_cv_id"
                android:layout_gravity="center"
-               android:layout_marginTop="2dp">
+               android:layout_marginTop="2dp"
+               android:visibility="gone">
 
                <TextView
                    android:id="@+id/cat3_tv_id"
@@ -203,12 +216,13 @@
                    android:layout_marginTop="30dp"/>
            </androidx.cardview.widget.CardView>
            <androidx.cardview.widget.CardView
-               android:id="@+id/qna_cv_id"
+               android:id="@+id/cat4_cv_id"
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
                android:layout_gravity="center"
-               android:layout_below="@+id/computer_cv_id"
-               android:layout_marginTop="2dp">
+               android:layout_below="@+id/cat3_cv_id"
+               android:layout_marginTop="2dp"
+               android:visibility="gone">
 
                <TextView
                    android:id="@+id/cat4_tv_id"
@@ -234,8 +248,9 @@
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
                android:layout_gravity="center"
-               android:layout_below="@+id/computer_cv_id"
-               android:layout_marginTop="2dp">
+               android:layout_below="@+id/cat3_cv_id"
+               android:layout_marginTop="2dp"
+               android:visibility="gone">
 
                <TextView
                    android:id="@+id/cat5_tv_id"
@@ -257,7 +272,7 @@
                    android:layout_marginTop="30dp"/>
            </androidx.cardview.widget.CardView>
        </RelativeLayout>
-
+       </ScrollView>
    </LinearLayout>
 
-</ScrollView>
+</LinearLayout>

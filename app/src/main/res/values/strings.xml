@@ -26,6 +26,8 @@
     <string name="facebook_account">ফেইসবুক একাউন্ট</string>
     <string name="smartphones_about">স্মার্টফোন সম্পর্কিত</string>
     <string name="mind_qna">মনের প্রশ্নোত্তর</string>
+    <string name="urgent_notes">জরুরী নোটসঃ</string>
+    <string name="urgent_files">জরুরী ফাইলসঃ</string>
     <string-array name="video_id_array">
         <item>CqhpNxI8qYw</item>
         <item>sasCrpgHDy8</item>

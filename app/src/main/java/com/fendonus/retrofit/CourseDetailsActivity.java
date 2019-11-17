@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Build;
@@ -51,9 +52,10 @@ public class CourseDetailsActivity extends AppCompatActivity {
     private AppCompatActivity appCompatActivity;
     YoutubePlayerView youtubePlayerView;
     CardView cat1CV, cat2CV, cat3CV, cat4CV, cat5CV;
-    RecyclerView accountRV, phoneRV, computerRV, qnaRV;
+    RecyclerView accountRV, phoneRV, computerRV, qnaRV, cat5RV;
     private CircleImageView backButtonIV;
     private TextView cat1, cat2, cat3, cat4, cat5;
+    private Button notesBTN, filesBTN;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,11 +82,12 @@ public class CourseDetailsActivity extends AppCompatActivity {
         phoneRV = findViewById(R.id.phone_recyler_view_id);
         computerRV = findViewById(R.id.computer_recyler_view_id);
         qnaRV = findViewById(R.id.qna_recyler_view_id);
+        cat5RV = findViewById(R.id.cat5_recyler_view_id);
 
-        cat1CV = findViewById(R.id.account_cv_id);
-        cat2CV = findViewById(R.id.phone_cv_id);
-        cat3CV = findViewById(R.id.computer_cv_id);
-        cat4CV = findViewById(R.id.qna_cv_id);
+        cat1CV = findViewById(R.id.cat1_cv_id);
+        cat2CV = findViewById(R.id.cat2_cv_id);
+        cat3CV = findViewById(R.id.cat3_cv_id);
+        cat4CV = findViewById(R.id.cat4_cv_id);
         cat5CV = findViewById(R.id.cat5_cv_id);
 
         cat1 = findViewById(R.id.cat1_tv_id);
@@ -93,6 +96,21 @@ public class CourseDetailsActivity extends AppCompatActivity {
         cat4 = findViewById(R.id.cat4_tv_id);
         cat5 = findViewById(R.id.cat5_tv_id);
 
+        notesBTN = findViewById(R.id.notes_btn_id);
+        filesBTN = findViewById(R.id.files_btn_id);
+
+        notesBTN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openNotesDialogBox();
+            }
+        });
+        filesBTN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openFilesDialogBox();
+            }
+        });
         backButtonIV = findViewById(R.id.course_back_iv_id);
 
         backButtonIV.setOnClickListener(new View.OnClickListener() {
@@ -104,7 +122,7 @@ public class CourseDetailsActivity extends AppCompatActivity {
         });
 
         cat1CV.setClickable(true);
-        networkCall(0);
+        //networkCall(0);
         cat1CV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -150,6 +168,19 @@ public class CourseDetailsActivity extends AppCompatActivity {
                 computerRV.setVisibility(View.GONE);
                 qnaRV.setVisibility(View.VISIBLE);
                 networkCall(3);
+                qnaRV.setAdapter(allChapterAdapter);
+                qnaRV.setLayoutManager(layoutManager);
+            }
+        });
+        cat5CV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                accountRV.setVisibility(View.GONE);
+                phoneRV.setVisibility(View.GONE);
+                computerRV.setVisibility(View.GONE);
+                qnaRV.setVisibility(View.GONE);
+                cat5RV.setVisibility(View.VISIBLE);
+                networkCall(4);
                 qnaRV.setAdapter(allChapterAdapter);
                 qnaRV.setLayoutManager(layoutManager);
             }
@@ -200,6 +231,8 @@ public class CourseDetailsActivity extends AppCompatActivity {
 
     }
 
+
+
     private void getCategoryTitle() {
         String id = getIntent().getStringExtra("course_id");
 
@@ -221,6 +254,13 @@ public class CourseDetailsActivity extends AppCompatActivity {
                         cat3.setVisibility(View.VISIBLE);
                         cat4.setVisibility(View.VISIBLE);
                         cat5.setVisibility(View.VISIBLE);
+
+                        cat1CV.setVisibility(View.VISIBLE);
+                        cat2CV.setVisibility(View.VISIBLE);
+                        cat3CV.setVisibility(View.VISIBLE);
+                        cat4CV.setVisibility(View.VISIBLE);
+                        cat5CV.setVisibility(View.VISIBLE);
+
                         cat1.setText(allChapters.get(0).getTitle());
                         cat2.setText(allChapters.get(1).getTitle());
                         cat3.setText(allChapters.get(2).getTitle());
@@ -231,6 +271,12 @@ public class CourseDetailsActivity extends AppCompatActivity {
                         cat2.setVisibility(View.VISIBLE);
                         cat3.setVisibility(View.VISIBLE);
                         cat4.setVisibility(View.VISIBLE);
+
+                        cat1CV.setVisibility(View.VISIBLE);
+                        cat2CV.setVisibility(View.VISIBLE);
+                        cat3CV.setVisibility(View.VISIBLE);
+                        cat4CV.setVisibility(View.VISIBLE);
+
                         cat1.setText(allChapters.get(0).getTitle());
                         cat2.setText(allChapters.get(1).getTitle());
                         cat3.setText(allChapters.get(2).getTitle());
@@ -239,16 +285,26 @@ public class CourseDetailsActivity extends AppCompatActivity {
                         cat1.setVisibility(View.VISIBLE);
                         cat2.setVisibility(View.VISIBLE);
                         cat3.setVisibility(View.VISIBLE);
+
+                        cat1CV.setVisibility(View.VISIBLE);
+                        cat2CV.setVisibility(View.VISIBLE);
+                        cat3CV.setVisibility(View.VISIBLE);
+
                         cat1.setText(allChapters.get(0).getTitle());
                         cat2.setText(allChapters.get(1).getTitle());
                         cat3.setText(allChapters.get(2).getTitle());
                     }else if (n==2){
                         cat1.setVisibility(View.VISIBLE);
                         cat2.setVisibility(View.VISIBLE);
+
+                        cat1CV.setVisibility(View.VISIBLE);
+                        cat2CV.setVisibility(View.VISIBLE);
+
                         cat1.setText(allChapters.get(0).getTitle());
                         cat2.setText(allChapters.get(1).getTitle());
                     }else if (n==1){
                         cat1.setVisibility(View.VISIBLE);
+                        cat1CV.setVisibility(View.VISIBLE);
                         cat1.setText(allChapters.get(0).getTitle());
                     }else if (n==0){
                         Toast.makeText(CourseDetailsActivity.this, "There is no Chapter", Toast.LENGTH_SHORT).show();
@@ -270,6 +326,24 @@ public class CourseDetailsActivity extends AppCompatActivity {
 
     public void setNewVideoLink(String link){
         youtubePlayVideo(link);
+    }
+
+    public void setNotes(String notes){
+        Log.e("asd", notes);
+    }
+    private void openNotesDialogBox() {
+        Dialog dialog = new Dialog(this);
+        dialog.setContentView(R.layout.note_box);
+        TextView noteTV = dialog.findViewById(R.id.notes_tv_id);
+        noteTV.setText("notes");
+        dialog.show();
+    }
+    private void openFilesDialogBox() {
+        Dialog dialog = new Dialog(this);
+        dialog.setContentView(R.layout.files_box);
+        TextView fileTV = dialog.findViewById(R.id.files_tv_id);
+        fileTV.setText("files");
+        dialog.show();
     }
 
     private void getAccountData() {
@@ -364,6 +438,14 @@ public class CourseDetailsActivity extends AppCompatActivity {
                 //progressDialog.dismiss();
                 videoList = allChapters.get(position).getVideo();
                 allChapterAdapter = new AllChapterAdapter(CourseDetailsActivity.this, videoList);
+
+                /*if (videoList.isEmpty()){
+                    Toast.makeText(CourseDetailsActivity.this, "There is no video", Toast.LENGTH_SHORT).show();
+                }else {
+                    videoList = allChapters.get(position).getVideo();
+                    allChapterAdapter = new AllChapterAdapter(CourseDetailsActivity.this, videoList);
+                }*/
+
             }
         });
     }

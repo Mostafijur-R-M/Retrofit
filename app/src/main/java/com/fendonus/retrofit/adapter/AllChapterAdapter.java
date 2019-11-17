@@ -46,6 +46,7 @@ public class AllChapterAdapter extends RecyclerView.Adapter<AllChapterAdapter.My
         String title = videoList.get(position).getTitle();
         Glide.with(context).load(thumbLink).into(holder.thumbIV);
         holder.titleTV.setText(title);
+        final Object notes = videoList.get(position).getNote();
 
 
 
@@ -54,12 +55,12 @@ public class AllChapterAdapter extends RecyclerView.Adapter<AllChapterAdapter.My
             public void onClick(View v) {
                 final String link = videoList.get(position).getYtd();
                 String videoLink = YOUTUBE_URL+link;
-                Log.e("link: ", videoLink);
-
+                //Log.e("asd", ""+notes);
                 /*Intent intent = new Intent(context, CourseDetailsActivity.class);
                 intent.putExtra("videoLink", link);
                 context.startActivity(intent);*/
                 ((CourseDetailsActivity)context).setNewVideoLink(link);
+                ((CourseDetailsActivity)context).setNotes(""+notes);
             }
         });
     }
