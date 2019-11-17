@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.fendonus.retrofit.CourseDetailsActivity;
 import com.fendonus.retrofit.R;
+import com.fendonus.retrofit.model.AllChapter;
 import com.fendonus.retrofit.model.Video;
 
 import java.util.List;
@@ -28,6 +29,7 @@ public class AllChapterAdapter extends RecyclerView.Adapter<AllChapterAdapter.My
     public AllChapterAdapter(Context context, List<Video> videoList) {
         this.context = context;
         this.videoList = videoList;
+
     }
 
     @NonNull

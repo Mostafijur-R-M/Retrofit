@@ -128,12 +128,14 @@
                >
 
                <TextView
+                   android:id="@+id/cat1_tv_id"
                    android:layout_width="match_parent"
                    android:layout_height="30dp"
                    android:text="@string/text_accounts"
                    android:textColor="@color/colorPrimary"
                    android:layout_marginLeft="15dp"
                    android:textSize="20sp"
+                   android:visibility="gone"
                    android:background="@color/color_chapterBG"
                    />
 
@@ -154,12 +156,14 @@
                >
 
                <TextView
+                   android:id="@+id/cat2_tv_id"
                    android:layout_width="match_parent"
                    android:layout_height="30dp"
                    android:text="@string/text_uses_smart_phone_about"
                    android:textColor="@color/colorPrimary"
                    android:background="@color/color_chapterBG"
                    android:layout_marginLeft="15dp"
+                   android:visibility="gone"
                    android:textSize="20sp"
                    />
 
@@ -180,9 +184,11 @@
                android:layout_marginTop="2dp">
 
                <TextView
+                   android:id="@+id/cat3_tv_id"
                    android:layout_width="match_parent"
                    android:layout_height="30dp"
                    android:text="@string/text_uses_computer_about"
+                   android:visibility="gone"
                    android:layout_marginLeft="15dp"
                    android:textColor="@color/colorPrimary"
                    android:background="@color/color_chapterBG"
@@ -205,10 +211,12 @@
                android:layout_marginTop="2dp">
 
                <TextView
+                   android:id="@+id/cat4_tv_id"
                    android:layout_width="match_parent"
                    android:layout_height="30dp"
                    android:layout_marginLeft="15dp"
                    android:text="@string/text_basic_mind_qna"
+                   android:visibility="gone"
                    android:textColor="@color/colorPrimary"
                    android:background="@color/color_chapterBG"
                    android:textSize="20sp"
@@ -216,6 +224,33 @@
 
                <androidx.recyclerview.widget.RecyclerView
                    android:id="@+id/qna_recyler_view_id"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:padding="2dp"
+                   android:layout_marginTop="30dp"/>
+           </androidx.cardview.widget.CardView>
+           <androidx.cardview.widget.CardView
+               android:id="@+id/cat5_cv_id"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:layout_gravity="center"
+               android:layout_below="@+id/computer_cv_id"
+               android:layout_marginTop="2dp">
+
+               <TextView
+                   android:id="@+id/cat5_tv_id"
+                   android:layout_width="match_parent"
+                   android:layout_height="30dp"
+                   android:layout_marginLeft="15dp"
+                   android:text="@string/text_basic_mind_qna"
+                   android:visibility="gone"
+                   android:textColor="@color/colorPrimary"
+                   android:background="@color/color_chapterBG"
+                   android:textSize="20sp"
+                   />
+
+               <androidx.recyclerview.widget.RecyclerView
+                   android:id="@+id/cat5_recyler_view_id"
                    android:layout_width="match_parent"
                    android:layout_height="wrap_content"
                    android:padding="2dp"

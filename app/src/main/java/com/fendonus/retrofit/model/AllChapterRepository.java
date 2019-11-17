@@ -17,12 +17,12 @@ public class AllChapterRepository {
     MutableLiveData<List<AllChapter>> mutableLiveData;
     List<AllChapter> allChapters;
 
-    public MutableLiveData<List<AllChapter>> getMutableLiveData(){
+    public MutableLiveData<List<AllChapter>> getMutableLiveData(String course_id){
         if (mutableLiveData == null){
             mutableLiveData = new MutableLiveData<>();
         }
         ApiInterface apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
-        Call<List<AllChapter>> call = apiInterface.getAllChapter("IwAR0MunBO7ZA-ewDaQT6HHOHIF-zx0bI--9QzyoSNdcLnUKj-S5Nr7NbhXXA");
+        Call<List<AllChapter>> call = apiInterface.getAllChapter(course_id);
         call.enqueue(new Callback<List<AllChapter>>() {
             @Override
             public void onResponse(Call<List<AllChapter>> call, Response<List<AllChapter>> response) {

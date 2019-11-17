@@ -171,14 +171,14 @@ public class MainActivity extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(R.string.app_name);
         builder.setIcon(R.mipmap.ic_logo_foreground);
-        builder.setMessage("Are you sure you want to leave?")
+        builder.setMessage("Are you sure you want to Exit?")
                 .setCancelable(false)
                 .setPositiveButton("Cancel", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         dialog.cancel();
                     }
                 })
-                .setNegativeButton("Leave", new DialogInterface.OnClickListener() {
+                .setNegativeButton("Exit", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         Intent setIntent = new Intent(Intent.ACTION_MAIN);
                         setIntent.addCategory(Intent.CATEGORY_HOME);

@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.fendonus.retrofit.CourseDetailsActivity;
 import com.fendonus.retrofit.R;
+import com.fendonus.retrofit.model.AllChapter;
 import com.fendonus.retrofit.model.Course;
 import com.fendonus.retrofit.view.CyberSecurityActivity;
 
@@ -47,22 +48,31 @@ public class AllCourseAdapter extends RecyclerView.Adapter<AllCourseAdapter.MyVi
         //Log.e("course:", URL[1]);
         holder.courseTV.setText(courseList.get(position).getTitle());
         Glide.with(context).load(URL[1]).into(holder.iconIV);
-
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
 
                 Toast.makeText(context, ""+position, Toast.LENGTH_SHORT).show();
-
+                String courseID = String.valueOf(courseList.get(position).getId());
+                String category = String.valueOf(courseList.get(position).getTitle());
                 Log.e("123456", String.valueOf(courseList.get(position).getId()));
 
-                if (position == 0){
+                final Intent intent;
+                String id = String.valueOf(position);
+                intent = new Intent(context, CourseDetailsActivity.class);
+                intent.putExtra("courseName", courseList.get(position).getTitle());
+                intent.putExtra("position", id);
+                intent.putExtra("course_id", courseID) ;
+                context.startActivity(intent);
+
+                /*if (position == 0){
                     final Intent intent;
                     String id = String.valueOf(position);
                     intent = new Intent(context, CourseDetailsActivity.class);
                     intent.putExtra("courseName", courseList.get(position).getTitle());
                     intent.putExtra("position", id);
+                    intent.putExtra("course_id", courseID) ;
                     context.startActivity(intent);
 
                 }else if (position == 1){
@@ -71,11 +81,12 @@ public class AllCourseAdapter extends RecyclerView.Adapter<AllCourseAdapter.MyVi
                     intent = new Intent(context, CyberSecurityActivity.class);
                     intent.putExtra("courseName", courseList.get(position).getTitle());
                     intent.putExtra("position", id);
+                    intent.putExtra("course_id", courseID) ;
                     context.startActivity(intent);
                 }
                 else {
                     Toast.makeText(context, "Coming Soon!", Toast.LENGTH_SHORT).show();
-                }
+                }*/
                 //goToCourseDetailsActivity();
             }
         });

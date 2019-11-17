@@ -20,6 +20,7 @@ import com.fendonus.retrofit.R;
 import com.fendonus.retrofit.adapter.AllChapterAdapter;
 import com.fendonus.retrofit.adapter.CyberSecurityAdapter;
 import com.fendonus.retrofit.model.AllChapter;
+import com.fendonus.retrofit.model.AllCourse;
 import com.fendonus.retrofit.model.Video;
 import com.fendonus.retrofit.viewmodel.AllChapterViewModel;
 import com.fendonus.retrofit.viewmodel.CyberSecurityViewModel;
@@ -221,14 +222,12 @@ public class CyberSecurityActivity extends AppCompatActivity {
         // play video when it's ready
         youtubePlayerView.play();
     }
-
     @Override
     protected void onPause() {
         super.onPause();
         // pause video when on the background mode.
         youtubePlayerView.pause();
     }
-
     @Override
     protected void onDestroy() {
         super.onDestroy();

@@ -17,10 +17,10 @@ public interface ApiInterface {
     @GET("api/courses/1{fbclid}")
     Call<List<AllCourse>> getAllCourse(@Query("fbclid")
                                                String fbclid);
-
-    @GET("api/chapter/90046{fbclid}")
-    Call<List<AllChapter>> getAllChapter(@Query("fbclid")
-                                                 String fbclid);
+    @FormUrlEncoded
+    @POST("api/chapter")
+    Call<List<AllChapter>> getAllChapter(@Field("course_id")
+                                                 String course_id);
 
     @GET("api/chapter/90059{fbclid}")
     Call<List<AllChapter>> getCyberSecurityChaper(@Query("fbclid")

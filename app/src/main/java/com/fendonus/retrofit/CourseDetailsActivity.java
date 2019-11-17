@@ -11,20 +11,19 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.fendonus.retrofit.adapter.AllChapterAdapter;
+import com.fendonus.retrofit.adapter.CategoryListAdapter;
 import com.fendonus.retrofit.model.AllChapter;
 import com.fendonus.retrofit.model.Video;
 import com.fendonus.retrofit.viewmodel.AllChapterViewModel;
-import com.google.android.material.tabs.TabLayout;
 import com.google.android.youtube.player.YouTubePlayer;
-import com.google.android.youtube.player.YouTubePlayerView;
 import com.jaedongchicken.ytplayer.YoutubePlayerView;
 import com.jaedongchicken.ytplayer.model.YTParams;
 
@@ -36,11 +35,14 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class CourseDetailsActivity extends AppCompatActivity {
 
     TextView courseTV;
-    RecyclerView recyclerView;
+    RecyclerView recyclerView, categoryRV;
     AllChapterViewModel allChapterViewModel;
     List<Video> videoList = new ArrayList<>();
+    List<AllChapter> chapterList = new ArrayList<>();
     RecyclerView.LayoutManager layoutManager;
     AllChapterAdapter allChapterAdapter;
+    RecyclerView.LayoutManager categoryLayoutManager;
+    CategoryListAdapter categoryListAdapter;
     ProgressDialog progressDialog;
     private static final String TAG = "CourseDetailsActivity";
     //YouTubePlayerView youTubePlayerView;
@@ -48,13 +50,10 @@ public class CourseDetailsActivity extends AppCompatActivity {
     YouTubePlayer.OnInitializedListener onInitializedListener;
     private AppCompatActivity appCompatActivity;
     YoutubePlayerView youtubePlayerView;
-    //TabLayout tabLayout;
-    /*ViewPager viewPager;
-    TabAccessorAdapter tabAccessorAdapter;*/
-
-    CardView accountCV, phoneCV, computerCV, qnaCV;
+    CardView cat1CV, cat2CV, cat3CV, cat4CV, cat5CV;
     RecyclerView accountRV, phoneRV, computerRV, qnaRV;
     private CircleImageView backButtonIV;
+    private TextView cat1, cat2, cat3, cat4, cat5;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,7 +74,6 @@ public class CourseDetailsActivity extends AppCompatActivity {
         progressDialog.setCanceledOnTouchOutside(false);
         progressDialog.show();*/
 
-
         youtubePlayerView = findViewById(R.id.youtubePlayerView);
 
         accountRV = findViewById(R.id.chapter_recyler_view_id);
@@ -83,10 +81,17 @@ public class CourseDetailsActivity extends AppCompatActivity {
         computerRV = findViewById(R.id.computer_recyler_view_id);
         qnaRV = findViewById(R.id.qna_recyler_view_id);
 
-        accountCV = findViewById(R.id.account_cv_id);
-        phoneCV = findViewById(R.id.phone_cv_id);
-        computerCV = findViewById(R.id.computer_cv_id);
-        qnaCV = findViewById(R.id.qna_cv_id);
+        cat1CV = findViewById(R.id.account_cv_id);
+        cat2CV = findViewById(R.id.phone_cv_id);
+        cat3CV = findViewById(R.id.computer_cv_id);
+        cat4CV = findViewById(R.id.qna_cv_id);
+        cat5CV = findViewById(R.id.cat5_cv_id);
+
+        cat1 = findViewById(R.id.cat1_tv_id);
+        cat2 = findViewById(R.id.cat2_tv_id);
+        cat3 = findViewById(R.id.cat3_tv_id);
+        cat4 = findViewById(R.id.cat4_tv_id);
+        cat5 = findViewById(R.id.cat5_tv_id);
 
         backButtonIV = findViewById(R.id.course_back_iv_id);
 
@@ -98,8 +103,9 @@ public class CourseDetailsActivity extends AppCompatActivity {
             }
         });
 
-        accountCV.setClickable(true);
-        accountCV.setOnClickListener(new View.OnClickListener() {
+        cat1CV.setClickable(true);
+        networkCall(0);
+        cat1CV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 accountRV.setVisibility(View.VISIBLE);
@@ -112,7 +118,7 @@ public class CourseDetailsActivity extends AppCompatActivity {
                 //getAccountData();
             }
         });
-        phoneCV.setOnClickListener(new View.OnClickListener() {
+        cat2CV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 accountRV.setVisibility(View.GONE);
@@ -124,7 +130,7 @@ public class CourseDetailsActivity extends AppCompatActivity {
                 phoneRV.setLayoutManager(layoutManager);
             }
         });
-        computerCV.setOnClickListener(new View.OnClickListener() {
+        cat3CV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 accountRV.setVisibility(View.GONE);
@@ -136,7 +142,7 @@ public class CourseDetailsActivity extends AppCompatActivity {
                 computerRV.setLayoutManager(layoutManager);
             }
         });
-        qnaCV.setOnClickListener(new View.OnClickListener() {
+        cat4CV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 accountRV.setVisibility(View.GONE);
@@ -148,20 +154,22 @@ public class CourseDetailsActivity extends AppCompatActivity {
                 qnaRV.setLayoutManager(layoutManager);
             }
         });
-        /*tabLayout = findViewById(R.id.mains_tab_id);
-        viewPager = findViewById(R.id.main_tabs_view_pager_id);
-        tabAccessorAdapter = new TabAccessorAdapter(getSupportFragmentManager());
-        viewPager.setAdapter(tabAccessorAdapter);
-        tabLayout.setupWithViewPager(viewPager);*/
 
         String courseTitle = getIntent().getStringExtra("courseName");
+
+
+
         courseTV = findViewById(R.id.course_title_tv_id);
         //youTubePlayerView = findViewById(R.id.youtube_player_view_id);
         //playBTN = findViewById(R.id.play_button_id);
 
         courseTV.setText(courseTitle);
         recyclerView = findViewById(R.id.chapter_recyler_view_id);
-        //layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        //categoryRV = findViewById(R.id.category_rv_id);
+
+        getCategoryTitle();
+       // categoryShow();
+
         //String link = getIntent().getStringExtra("videoLink");
        /* youtubePlayVideo("o5NQ7a-oa8s");
         youtubePlayVideo(link);*/
@@ -191,6 +199,75 @@ public class CourseDetailsActivity extends AppCompatActivity {
 
 
     }
+
+    private void getCategoryTitle() {
+        String id = getIntent().getStringExtra("course_id");
+
+        categoryLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        allChapterViewModel = ViewModelProviders.of(this).get(AllChapterViewModel.class);
+        allChapterViewModel.listLiveData(id).observe(this, new Observer<List<AllChapter>>() {
+            @Override
+            public void onChanged(List<AllChapter> allChapters) {
+                final int n = allChapters.size();
+                Log.e("asdf", String.valueOf(n));
+                
+                for (int i = 0; i < allChapters.size(); i++){
+                    //chapterList = allChapters.get(i).getTitle();
+                    String title = allChapters.get(i).getTitle();
+                    Log.e("asdfg", title);
+                    if (n==5){
+                        cat1.setVisibility(View.VISIBLE);
+                        cat2.setVisibility(View.VISIBLE);
+                        cat3.setVisibility(View.VISIBLE);
+                        cat4.setVisibility(View.VISIBLE);
+                        cat5.setVisibility(View.VISIBLE);
+                        cat1.setText(allChapters.get(0).getTitle());
+                        cat2.setText(allChapters.get(1).getTitle());
+                        cat3.setText(allChapters.get(2).getTitle());
+                        cat4.setText(allChapters.get(3).getTitle());
+                        cat5.setText(allChapters.get(4).getTitle());
+                    }else if (n==4){
+                        cat1.setVisibility(View.VISIBLE);
+                        cat2.setVisibility(View.VISIBLE);
+                        cat3.setVisibility(View.VISIBLE);
+                        cat4.setVisibility(View.VISIBLE);
+                        cat1.setText(allChapters.get(0).getTitle());
+                        cat2.setText(allChapters.get(1).getTitle());
+                        cat3.setText(allChapters.get(2).getTitle());
+                        cat4.setText(allChapters.get(3).getTitle());
+                    }else if (n==3){
+                        cat1.setVisibility(View.VISIBLE);
+                        cat2.setVisibility(View.VISIBLE);
+                        cat3.setVisibility(View.VISIBLE);
+                        cat1.setText(allChapters.get(0).getTitle());
+                        cat2.setText(allChapters.get(1).getTitle());
+                        cat3.setText(allChapters.get(2).getTitle());
+                    }else if (n==2){
+                        cat1.setVisibility(View.VISIBLE);
+                        cat2.setVisibility(View.VISIBLE);
+                        cat1.setText(allChapters.get(0).getTitle());
+                        cat2.setText(allChapters.get(1).getTitle());
+                    }else if (n==1){
+                        cat1.setVisibility(View.VISIBLE);
+                        cat1.setText(allChapters.get(0).getTitle());
+                    }else if (n==0){
+                        Toast.makeText(CourseDetailsActivity.this, "There is no Chapter", Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+                        Toast.makeText(CourseDetailsActivity.this, "There is no video", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(CourseDetailsActivity.this, MainActivity.class));
+                        finish();
+                    }
+                }
+            }
+        });
+       /* //categoryRV.setLayoutManager(new LinearLayoutManager(this));
+        categoryListAdapter = new CategoryListAdapter(this, allChapterList);
+        //categoryListAdapter.setClickListener(this);
+        categoryRV.setAdapter(categoryListAdapter);
+        categoryRV.setLayoutManager(categoryLayoutManager);*/
+    }
+
     public void setNewVideoLink(String link){
         youtubePlayVideo(link);
     }
@@ -277,10 +354,11 @@ public class CourseDetailsActivity extends AppCompatActivity {
     }
 
     private void networkCall(final int position) {
+        String id = getIntent().getStringExtra("course_id");
         //final String id = getIntent().getStringExtra("position");
         layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         allChapterViewModel = ViewModelProviders.of(this).get(AllChapterViewModel.class);
-        allChapterViewModel.listLiveData().observe(this, new Observer<List<AllChapter>>() {
+        allChapterViewModel.listLiveData(id).observe(this, new Observer<List<AllChapter>>() {
             @Override
             public void onChanged(List<AllChapter> allChapters) {
                 //progressDialog.dismiss();

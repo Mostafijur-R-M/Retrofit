@@ -19,7 +19,7 @@ public class AllChapterViewModel extends AndroidViewModel {
         super(application);
         allChapterRepository = new AllChapterRepository();
     }
-    public LiveData<List<AllChapter>> listLiveData(){
-        return allChapterRepository.getMutableLiveData();
+    public LiveData<List<AllChapter>> listLiveData(String course_id){
+        return allChapterRepository.getMutableLiveData(course_id);
     }
 }
