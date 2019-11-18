@@ -148,6 +148,19 @@ public class MainActivity extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.action_notifications:
+                openNotificationsDialogBox();
+                return true;
+                default:
+                    return super.onOptionsItemSelected(item);
+        }
+
+
+    }
+
     private void networkCall() {
         allCourseViewModel = ViewModelProviders.of(this).get(AllCourseViewModel.class);
         allCourseViewModel.liveData().observe(this, new Observer<List<AllCourse>>() {

@@ -47,6 +47,7 @@ public class AllChapterAdapter extends RecyclerView.Adapter<AllChapterAdapter.My
         Glide.with(context).load(thumbLink).into(holder.thumbIV);
         holder.titleTV.setText(title);
         final Object notes = videoList.get(position).getNote();
+        final Object files = videoList.get(position).getFile();
 
 
 
@@ -61,6 +62,7 @@ public class AllChapterAdapter extends RecyclerView.Adapter<AllChapterAdapter.My
                 context.startActivity(intent);*/
                 ((CourseDetailsActivity)context).setNewVideoLink(link);
                 ((CourseDetailsActivity)context).setNotes(""+notes);
+                ((CourseDetailsActivity)context).setFiles(""+files);
             }
         });
     }

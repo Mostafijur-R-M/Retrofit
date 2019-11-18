@@ -242,12 +242,9 @@ public class CourseDetailsActivity extends AppCompatActivity {
             @Override
             public void onChanged(List<AllChapter> allChapters) {
                 final int n = allChapters.size();
-                Log.e("asdf", String.valueOf(n));
-                
                 for (int i = 0; i < allChapters.size(); i++){
                     //chapterList = allChapters.get(i).getTitle();
                     String title = allChapters.get(i).getTitle();
-                    Log.e("asdfg", title);
                     if (n==5){
                         cat1.setVisibility(View.VISIBLE);
                         cat2.setVisibility(View.VISIBLE);
@@ -328,21 +325,44 @@ public class CourseDetailsActivity extends AppCompatActivity {
         youtubePlayVideo(link);
     }
 
+    private String note = "";
+    private String file = "";
     public void setNotes(String notes){
-        Log.e("asd", notes);
+        note = notes;
+        if (note.equals("null")){
+            notesBTN.setText("Notes");
+        }else {
+            notesBTN.setText("Notes*");
+        }
+    }
+    public void setFiles(String files) {
+        file = files;
+        if (file.equals("null")){
+            filesBTN.setText("Files");
+        }else {
+            filesBTN.setText("Files*");
+        }
     }
     private void openNotesDialogBox() {
         Dialog dialog = new Dialog(this);
         dialog.setContentView(R.layout.note_box);
         TextView noteTV = dialog.findViewById(R.id.notes_tv_id);
-        noteTV.setText("notes");
+        if (note.equals("null")){
+            noteTV.setText("এই ভিডিও তে কোনো নোটস নেই!");
+        }else {
+            noteTV.setText(note);
+        }
         dialog.show();
     }
     private void openFilesDialogBox() {
         Dialog dialog = new Dialog(this);
         dialog.setContentView(R.layout.files_box);
         TextView fileTV = dialog.findViewById(R.id.files_tv_id);
-        fileTV.setText("files");
+        if (file.equals("null")){
+            fileTV.setText("এই ভিডিও তে কোনো ফাইল নেই!");
+        }else {
+            fileTV.setText(file);
+        }
         dialog.show();
     }
 
@@ -429,7 +449,6 @@ public class CourseDetailsActivity extends AppCompatActivity {
 
     private void networkCall(final int position) {
         String id = getIntent().getStringExtra("course_id");
-        //final String id = getIntent().getStringExtra("position");
         layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         allChapterViewModel = ViewModelProviders.of(this).get(AllChapterViewModel.class);
         allChapterViewModel.listLiveData(id).observe(this, new Observer<List<AllChapter>>() {
@@ -438,6 +457,7 @@ public class CourseDetailsActivity extends AppCompatActivity {
                 //progressDialog.dismiss();
                 videoList = allChapters.get(position).getVideo();
                 allChapterAdapter = new AllChapterAdapter(CourseDetailsActivity.this, videoList);
+
 
                 /*if (videoList.isEmpty()){
                     Toast.makeText(CourseDetailsActivity.this, "There is no video", Toast.LENGTH_SHORT).show();
@@ -449,4 +469,6 @@ public class CourseDetailsActivity extends AppCompatActivity {
             }
         });
     }
+
+
 }

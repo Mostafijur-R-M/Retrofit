@@ -56,7 +56,6 @@ public class AllCourseAdapter extends RecyclerView.Adapter<AllCourseAdapter.MyVi
                 Toast.makeText(context, ""+position, Toast.LENGTH_SHORT).show();
                 String courseID = String.valueOf(courseList.get(position).getId());
                 String category = String.valueOf(courseList.get(position).getTitle());
-                Log.e("123456", String.valueOf(courseList.get(position).getId()));
 
                 final Intent intent;
                 String id = String.valueOf(position);

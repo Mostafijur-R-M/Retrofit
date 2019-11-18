@@ -18,7 +18,8 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="..."
-        android:textAlignment="center"
+        android:text="@string/about_us_details"
+        android:textSize="12sp"
+        android:padding="5dp"
         android:textColor="@color/Black"/>
 </LinearLayout>
