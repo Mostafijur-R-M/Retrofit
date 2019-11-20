@@ -2,6 +2,7 @@ package com.fendonus.retrofit.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -46,6 +47,8 @@ public class AllCourseAdapter extends RecyclerView.Adapter<AllCourseAdapter.MyVi
         String image[] = imageLink.split(" ");
         String URL[] = image[1].split("@@");
         //Log.e("course:", URL[1]);
+        holder.courseTF = Typeface.createFromAsset(context.getAssets(), "font/SolaimanLipi.ttf");
+        holder.courseTV.setTypeface(holder.courseTF);
         holder.courseTV.setText(courseList.get(position).getTitle());
         Glide.with(context).load(URL[1]).into(holder.iconIV);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -104,12 +107,14 @@ public class AllCourseAdapter extends RecyclerView.Adapter<AllCourseAdapter.MyVi
 
         ImageView iconIV;
         TextView courseTV;
-
+        Typeface courseTF;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
             iconIV = itemView.findViewById(R.id.course_icon_iv_id);
             courseTV = itemView.findViewById(R.id.course_name_tv_id);
+
+
         }
     }
 }

@@ -2,6 +2,8 @@ package com.fendonus.retrofit.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.AssetManager;
+import android.graphics.Typeface;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,6 +46,8 @@ public class AllChapterAdapter extends RecyclerView.Adapter<AllChapterAdapter.My
 
         String thumbLink = videoList.get(position).getThumb();
         String title = videoList.get(position).getTitle();
+        holder.titleTF = Typeface.createFromAsset(context.getAssets(), "font/SolaimanLipi.ttf");
+        holder.titleTV.setTypeface(holder.titleTF);
         Glide.with(context).load(thumbLink).into(holder.thumbIV);
         holder.titleTV.setText(title);
         final Object notes = videoList.get(position).getNote();
@@ -73,6 +77,7 @@ public class AllChapterAdapter extends RecyclerView.Adapter<AllChapterAdapter.My
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
+        Typeface titleTF;
         ImageView thumbIV;
         TextView titleTV;
         public MyViewHolder(@NonNull View itemView) {

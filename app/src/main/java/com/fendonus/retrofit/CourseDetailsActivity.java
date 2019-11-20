@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -54,9 +55,9 @@ public class CourseDetailsActivity extends AppCompatActivity {
     CardView cat1CV, cat2CV, cat3CV, cat4CV, cat5CV;
     RecyclerView accountRV, phoneRV, computerRV, qnaRV, cat5RV;
     private CircleImageView backButtonIV;
-    private TextView cat1, cat2, cat3, cat4, cat5;
+    private TextView cat1, cat2, cat3, cat4, cat5, courseName;
     private Button notesBTN, filesBTN;
-
+    private Typeface typeface;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,7 +76,7 @@ public class CourseDetailsActivity extends AppCompatActivity {
         progressDialog.setMessage("Loading...");
         progressDialog.setCanceledOnTouchOutside(false);
         progressDialog.show();*/
-
+        typeface = Typeface.createFromAsset(getAssets(), "font/SolaimanLipi.ttf");
         youtubePlayerView = findViewById(R.id.youtubePlayerView);
 
         accountRV = findViewById(R.id.chapter_recyler_view_id);
@@ -191,9 +192,11 @@ public class CourseDetailsActivity extends AppCompatActivity {
 
 
         courseTV = findViewById(R.id.course_title_tv_id);
+        courseName = findViewById(R.id.course_name_tv_id);
         //youTubePlayerView = findViewById(R.id.youtube_player_view_id);
         //playBTN = findViewById(R.id.play_button_id);
-
+        courseTV.setTypeface(typeface);
+        courseName.setTypeface(typeface);
         courseTV.setText(courseTitle);
         recyclerView = findViewById(R.id.chapter_recyler_view_id);
         //categoryRV = findViewById(R.id.category_rv_id);
@@ -252,6 +255,12 @@ public class CourseDetailsActivity extends AppCompatActivity {
                         cat4.setVisibility(View.VISIBLE);
                         cat5.setVisibility(View.VISIBLE);
 
+                        cat1.setTypeface(typeface);
+                        cat2.setTypeface(typeface);
+                        cat3.setTypeface(typeface);
+                        cat4.setTypeface(typeface);
+                        cat5.setTypeface(typeface);
+
                         cat1CV.setVisibility(View.VISIBLE);
                         cat2CV.setVisibility(View.VISIBLE);
                         cat3CV.setVisibility(View.VISIBLE);
@@ -269,6 +278,12 @@ public class CourseDetailsActivity extends AppCompatActivity {
                         cat3.setVisibility(View.VISIBLE);
                         cat4.setVisibility(View.VISIBLE);
 
+                        cat1.setTypeface(typeface);
+                        cat2.setTypeface(typeface);
+                        cat3.setTypeface(typeface);
+                        cat4.setTypeface(typeface);
+
+
                         cat1CV.setVisibility(View.VISIBLE);
                         cat2CV.setVisibility(View.VISIBLE);
                         cat3CV.setVisibility(View.VISIBLE);
@@ -283,6 +298,10 @@ public class CourseDetailsActivity extends AppCompatActivity {
                         cat2.setVisibility(View.VISIBLE);
                         cat3.setVisibility(View.VISIBLE);
 
+                        cat1.setTypeface(typeface);
+                        cat2.setTypeface(typeface);
+                        cat3.setTypeface(typeface);
+
                         cat1CV.setVisibility(View.VISIBLE);
                         cat2CV.setVisibility(View.VISIBLE);
                         cat3CV.setVisibility(View.VISIBLE);
@@ -294,6 +313,9 @@ public class CourseDetailsActivity extends AppCompatActivity {
                         cat1.setVisibility(View.VISIBLE);
                         cat2.setVisibility(View.VISIBLE);
 
+                        cat1.setTypeface(typeface);
+                        cat2.setTypeface(typeface);
+
                         cat1CV.setVisibility(View.VISIBLE);
                         cat2CV.setVisibility(View.VISIBLE);
 
@@ -301,6 +323,7 @@ public class CourseDetailsActivity extends AppCompatActivity {
                         cat2.setText(allChapters.get(1).getTitle());
                     }else if (n==1){
                         cat1.setVisibility(View.VISIBLE);
+                        cat1.setTypeface(typeface);
                         cat1CV.setVisibility(View.VISIBLE);
                         cat1.setText(allChapters.get(0).getTitle());
                     }else if (n==0){
